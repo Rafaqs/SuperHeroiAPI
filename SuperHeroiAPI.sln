@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperHeroiAPI", "SuperHeroiAPI\SuperHeroiAPI.csproj", "{20FE7892-6EEF-42CD-BE5A-B98DEDABA744}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperHeroiAPI", "SuperHeroiAPI\SuperHeroiAPI.csproj", "{20FE7892-6EEF-42CD-BE5A-B98DEDABA744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hero.Dominio", "Hero.Dominio\Hero.Dominio.csproj", "{C9DEB8A9-16A9-4854-A094-FA405F911FE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hero.Repo", "Hero.Repo\Hero.Repo.csproj", "{3109AA55-BA21-4E6E-9F36-19E9C9CEFA13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{20FE7892-6EEF-42CD-BE5A-B98DEDABA744}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20FE7892-6EEF-42CD-BE5A-B98DEDABA744}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20FE7892-6EEF-42CD-BE5A-B98DEDABA744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9DEB8A9-16A9-4854-A094-FA405F911FE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9DEB8A9-16A9-4854-A094-FA405F911FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9DEB8A9-16A9-4854-A094-FA405F911FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9DEB8A9-16A9-4854-A094-FA405F911FE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3109AA55-BA21-4E6E-9F36-19E9C9CEFA13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3109AA55-BA21-4E6E-9F36-19E9C9CEFA13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3109AA55-BA21-4E6E-9F36-19E9C9CEFA13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3109AA55-BA21-4E6E-9F36-19E9C9CEFA13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

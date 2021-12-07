@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SuperHeroiAPI.Models;
+﻿using Hero.Dominio;
+using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SuperHeroiAPI.Data
+namespace Hero.Repo
 {
     public class HeroiContext : DbContext
     {
@@ -14,11 +15,7 @@ namespace SuperHeroiAPI.Data
         public DbSet<Arma> Armas { get; set; }
         public DbSet<HeroiBatalha> HeroisBatalhas { get; set; }
         public DbSet<IdentidadeSecreta> IdentidadeSecreta { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Password = sa123456; Persist Security Info = True; User ID = sa; Initial Catalog = HeroApp; Data Source = GAMES\\HERO");
-        }
+        public HeroiContext(DbContextOptions<HeroiContext> options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
