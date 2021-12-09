@@ -15,19 +15,21 @@ namespace SuperHeroiAPI.Controllers
     [ApiController]
     public class BatalhaController : ControllerBase
     {
-        private readonly HeroiContext _context;
-        public BatalhaController(HeroiContext context)
+        private readonly IHeroRepository _repo;
+
+        public BatalhaController(IHeroRepository repo)
         {
-           _context = context;
+            _repo = repo;
         }
 
         // GET: api/<BatalhaController>
         [HttpGet]
-        public ActionResult Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
-                return Ok(new Batalha());
+                var batalhas = await _repo.GetAllBatalhas(true);
+                return Ok(batalhas);
             }
             catch (Exception ex)
             {
@@ -37,53 +39,81 @@ namespace SuperHeroiAPI.Controllers
 
         // GET api/<BatalhaController>/5
         [HttpGet("{id}", Name = "GetBatalha")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            try
+            {
+                var batalhas = await _repo.GetBatalhaById(id, true);
+                return Ok(batalhas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex}");
+            }
         }
 
         // POST api/<BatalhaController>
         [HttpPost]
-        public ActionResult Post(Batalha model)
+        public async Task<IActionResult> Post(Batalha model)
         {
             try
             {
-                _context.Add(model);
-                _context.SaveChanges();
+                _repo.Add(model);
 
-                return Ok("Add");
+                if (await _repo.SaveChangeAsync())
+                {
+                    return Ok("Adicionado");
+                }   
             }
             catch (Exception ex)
             {
                 return BadRequest($"Erro: {ex}");
             }
+            return BadRequest("Não Adicionado");
         }
 
         // PUT api/<BatalhaController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, Batalha model)
+        public async Task<IActionResult> Put(int id, Batalha model)
         {
             try
             {
-                if(_context.Batalhas.AsNoTracking().FirstOrDefault(b => b.Id ==id) != null)
+                var batalha = await _repo.GetBatalhaById(id);
+                if (batalha != null)
                 {
-                    _context.Update(model);
-                    _context.SaveChanges();
-
-                    return Ok("Alterado");
+                    _repo.Update(model);
+                    if (await _repo.SaveChangeAsync())
+                        return Ok("Atualizado");
                 }
-                return Ok("Não Encontrado");
             }
             catch (Exception ex)
             {
                 return BadRequest($"Erro: {ex}");
             }
+
+            return BadRequest($"Não Atualizado!");
         }
 
         // DELETE api/<BatalhaController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var batalha = await _repo.GetBatalhaById(id);
+                if(batalha != null)
+                {
+                    _repo.Delete(batalha);
+                    if (await _repo.SaveChangeAsync())
+                        return Ok("Deletado");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex}");
+            }
+
+            return BadRequest($"Não Deletado!");
         }
     }
 }
